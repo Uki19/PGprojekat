@@ -44,7 +44,7 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
     
     func doFFTdata(window:Int = 0){
         
-        let preDftArray = wavData.dataForWindows[window];
+        let preDftArray = wavData.rawDataForWindows[window];
         
         
         let postDftArray = dftMaker.fft(preDftArray)
@@ -82,7 +82,7 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
         var dataEntries: [BarChartDataEntry] = []
         var frequencies: [String] = []
         
-        for i in 1..<chartData.count/2 {
+        for i in 1..<chartData.count {
             let dataEntry = BarChartDataEntry(value: chartData[i], xIndex: i)
             dataEntries.append(dataEntry)
             frequencies.append("\(i*minFrequency)")

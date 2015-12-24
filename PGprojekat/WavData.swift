@@ -30,6 +30,7 @@ struct WavData : CustomStringConvertible {
     var dataForWindows: [[Double]] = [[Double]]()
     var wordData:[Double] = [Double]()
     var rawData:[Double] = [Double]()
+    var rawDataForWindows: [[Double]] = [[Double]]()
     
     var description:String {
     

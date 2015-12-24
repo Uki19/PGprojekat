@@ -31,6 +31,15 @@ class DFT: NSObject {
         let weights = vDSP_create_fftsetupD(length, radix)
         vDSP_fft_zipD(weights, &splitComplex, 1, length, FFTDirection(FFT_FORWARD))
         
+//        for i in 0..<real.count {
+//            splitComplex.imagp[i] /= Double(real.count)
+//            splitComplex.realp[i] /= Double(real.count)
+//        }
+        
+        for i in 0..<real.count {
+            print("DFT \(i):Real - \(splitComplex.realp[i]) Imag - \(splitComplex.imagp[i])")
+        }
+        
         var magnitudes = [Double](count: input.count, repeatedValue: 0.0)
         vDSP_zvmagsD(&splitComplex, 1, &magnitudes, 1, vDSP_Length(input.count))
         
@@ -55,14 +64,18 @@ class DFT: NSObject {
         
         for var i = 0;i < m;i++ {
             
-            arg = 2.0 * M_PI * Double(i)/Double(m)
-            for var k = 0; k<m; k++ {
-                cosarg = cos(Double(k) * arg)
-                sinarg = sin(Double(k) * arg)
-                outputReal[k] += (input[k] * cosarg + inputImag[k] * sinarg)
-                outputImag[k] += -(input[k] * sinarg + inputImag[k] * cosarg)
+            for var k = 0; k < m; k++ {
+                arg = 2.0 * M_PI * Double(k) * Double(i)/Double(m)
+                cosarg = cos(arg)
+                sinarg = sin(arg)
+                outputReal[k] += input[k] * cosarg + inputImag[k] * sinarg
+                outputImag[k] += -input[k] * sinarg + inputImag[k] * cosarg
             }
             
+        }
+        
+        for i in 0..<outputReal.count {
+            print("DFT \(i):Real - \(outputReal[i]) Imag - \(outputImag[i])")
         }
         
         for var i = 0; i < m; i++ {

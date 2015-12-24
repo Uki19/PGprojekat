@@ -167,17 +167,21 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         wavData.SamplesPerWindow = dotsPerWindow
         wavData.minWindowFrequency = minWindowFrequency
         var tmpMatrix = [[Double]]()
+        var tmpMatrixRaw = [[Double]]()
         
         for _ in 0..<Int(numberOfWindows) {
             tmpMatrix.append(Array(count:dotsPerWindow, repeatedValue:0.0))
+            tmpMatrixRaw.append(Array(count:dotsPerWindow, repeatedValue:0.0))
         }
         
         for (var i=0;i<Int(numberOfWindows);i++){
             for (var j=0;j<dotsPerWindow;j++){
                 tmpMatrix[i][j]=wavData.data[i*wavData.SamplesPerWindow+j]
+                tmpMatrixRaw[i][j]=wavData.rawData[i*wavData.SamplesPerWindow+j]
             }
         }
         wavData.dataForWindows = tmpMatrix
+        wavData.rawDataForWindows = tmpMatrixRaw
         print(dotsPerWindow)
         
         wavData.countThreshold(windowSize, dotsPerWindow: dotsPerWindow)

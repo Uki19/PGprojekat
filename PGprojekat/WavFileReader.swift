@@ -95,6 +95,8 @@ class WavFileReader: NSObject {
         
         if isRawData {
             return Int(out)
+            
+            // podeliti sa 32767 ako treba double value od -1 do 1
         }
         else {
             return Int(pow(Double(out),2.0))
