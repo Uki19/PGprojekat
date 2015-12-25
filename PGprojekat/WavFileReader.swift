@@ -41,7 +41,7 @@ class WavFileReader: NSObject {
         }
         
         wavData.wavLength = Float(wavData.dataSize) / Float(wavData.byteRate)
-        
+        //test
        
         for var i = 0; i<wavData.dataSize; i+=wavData.blockSize {
             
