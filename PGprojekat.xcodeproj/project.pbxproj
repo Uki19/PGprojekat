@@ -11,6 +11,7 @@
 		7511CE7E1C29EFE00068AB3D /* MFCC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7511CE7D1C29EFE00068AB3D /* MFCC.swift */; };
 		751CAEE71C236200007C77FF /* ResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 751CAEE61C236200007C77FF /* ResultViewController.swift */; };
 		752EC2371C2733E5001B8E67 /* SignalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 752EC2361C2733E5001B8E67 /* SignalView.swift */; };
+		753EE0451C30D95400E30436 /* MyExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 753EE0441C30D95400E30436 /* MyExtensions.swift */; };
 		754CDEFD1C1880B500B617BA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDEFC1C1880B500B617BA /* AppDelegate.swift */; };
 		754CDEFF1C1880B500B617BA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDEFE1C1880B500B617BA /* ViewController.swift */; };
 		754CDF021C1880B500B617BA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 754CDF001C1880B500B617BA /* Main.storyboard */; };
@@ -50,6 +51,7 @@
 		7511CE7D1C29EFE00068AB3D /* MFCC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MFCC.swift; sourceTree = "<group>"; };
 		751CAEE61C236200007C77FF /* ResultViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResultViewController.swift; sourceTree = "<group>"; };
 		752EC2361C2733E5001B8E67 /* SignalView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignalView.swift; sourceTree = "<group>"; };
+		753EE0441C30D95400E30436 /* MyExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyExtensions.swift; sourceTree = "<group>"; };
 		754CDEF91C1880B400B617BA /* PGprojekat.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PGprojekat.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		754CDEFC1C1880B500B617BA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		754CDEFE1C1880B500B617BA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -153,6 +155,7 @@
 				75B73C271C20E1770022691A /* WavData.swift */,
 				751CAEE61C236200007C77FF /* ResultViewController.swift */,
 				752EC2361C2733E5001B8E67 /* SignalView.swift */,
+				753EE0441C30D95400E30436 /* MyExtensions.swift */,
 				754CDF001C1880B500B617BA /* Main.storyboard */,
 				754CDF031C1880B500B617BA /* Assets.xcassets */,
 				754CDF051C1880B500B617BA /* LaunchScreen.storyboard */,
@@ -386,6 +389,7 @@
 				75B73C281C20E1770022691A /* WavData.swift in Sources */,
 				754CDEFD1C1880B500B617BA /* AppDelegate.swift in Sources */,
 				75CD822C1C1E1CD200392310 /* WavFileReader.swift in Sources */,
+				753EE0451C30D95400E30436 /* MyExtensions.swift in Sources */,
 				7511CE7E1C29EFE00068AB3D /* MFCC.swift in Sources */,
 				751CAEE71C236200007C77FF /* ResultViewController.swift in Sources */,
 			);

@@ -29,6 +29,7 @@ struct WavData : CustomStringConvertible {
     var data:[Double] = [Double]()
     var dataForWindows: [[Double]] = [[Double]]()
     var wordData:[Double] = [Double]()
+    var wordRawDataForWindows: [[Double]] = [[Double]]()
     var rawData:[Double] = [Double]()
     var rawDataForWindows: [[Double]] = [[Double]]()
     
@@ -44,6 +45,7 @@ struct WavData : CustomStringConvertible {
         
     }
     
+    // MARK: Racunanje thresholda za signal (note: uzima drugih 100ms zbog fade-in efekta na iOSu)
     mutating func countThreshold(windowSize: Int, dotsPerWindow:Int)  {
         
         var threshold = 0.0
@@ -76,8 +78,3 @@ struct WavData : CustomStringConvertible {
     }
 }
 
-func + (left: String, right: String) -> String {
-    var newString = left
-    newString.appendContentsOf(right)
-    return newString
-}

@@ -9,10 +9,10 @@
 import UIKit
 
 class WavFileReader: NSObject {
-        
+    
+    
+    //MARK: Citanje wav headera i data
     func readWavFileData(url: NSURL) -> WavData {
-        
-        
         
         var wavData=WavData()
         

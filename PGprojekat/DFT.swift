@@ -11,6 +11,8 @@ import Accelerate
 
 class DFT: NSObject {
     
+    
+    // MARK: FFT funkcija za transformaciju iz vremenskog u frekvencioni domen
     func fft(var input: [Double]) -> [Double] {
         
         let closestTwoPow = ceil(log2(Float(input.count)))
@@ -35,10 +37,10 @@ class DFT: NSObject {
 //            splitComplex.imagp[i] /= Double(real.count)
 //            splitComplex.realp[i] /= Double(real.count)
 //        }
-        
-        for i in 0..<real.count {
-            print("DFT \(i):Real - \(splitComplex.realp[i]) Imag - \(splitComplex.imagp[i])")
-        }
+//        
+//        for i in 0..<real.count {
+//            print("DFT \(i):Real - \(splitComplex.realp[i]) Imag - \(splitComplex.imagp[i])")
+//        }
         
         var magnitudes = [Double](count: input.count, repeatedValue: 0.0)
         vDSP_zvmagsD(&splitComplex, 1, &magnitudes, 1, vDSP_Length(input.count))
@@ -51,6 +53,7 @@ class DFT: NSObject {
         return normalizedMagnitudes
     }
     
+//DFT funkcija - ignorisati
     func dft(input: [Double]) -> [Double]{
     
         var arg = 0.0
@@ -87,7 +90,18 @@ class DFT: NSObject {
         return magnitudeArray
     }
     
+    func doFFTforWordWindows(input: [[Double]]) -> [[Double]]{
+        
+        var fftForWindows = Array(count: input.count, repeatedValue: [Double]())
+        
+        for var i = 0;i<input.count;i++ {
+            let windowFFT = self.fft(input[i])
+            fftForWindows[i]=windowFFT
+        }
+        return fftForWindows
+    }
     
+    //MARK: Dodavanje prozorske funkcije - Hamming
     func addHammingFunction(input: [Double]) -> [Double]{
         
         var tmpArray = [Double](input)

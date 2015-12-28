@@ -16,7 +16,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var recButton: UIButton!
-//    @IBOutlet weak var dftChart: BarChartView!
     
     var documentsPath: String!
     var player: AVAudioPlayer!
@@ -131,7 +130,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
     }
     
-    
+    //MARK: ViewController Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         loadWavFiles()
@@ -188,8 +187,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         wavData.wordWindowRange = getWordSignal(wavData, numberOfWindows: numberOfWindows)
         getWordSignalWithSpace(wavData, numberOfWindows: numberOfWindows)
         
+        let dft = DFT()
+        
+        let postFFT = dft.doFFTforWordWindows(wavData.wordRawDataForWindows)
+    
+        
         let mfcc = MFCC(wavData: wavData)
-        mfcc.computeFilterBank()
+        mfcc.doMFCC(postFFT)
         
         
         performSegueWithIdentifier("showResults", sender: self)
@@ -263,9 +267,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         for(var i=0;i<wordWindows.count;i++){
             
             wavData.wordData.appendContentsOf(wavData.dataForWindows[wordWindows[i]])
+            wavData.wordRawDataForWindows.append(wavData.rawDataForWindows[wordWindows[i]])
             
         }
-         print(wordWindows.count)
+        print("RAW DATA: \(wavData.wordRawDataForWindows.count)")
+        print("COUNT: \(wordWindows.count)")
         print(wavData.wordData.count/wavData.SamplesPerWindow)
         
         return (wordWindows.first!, wordWindows.last!)
@@ -344,7 +350,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         }
     }
     
-    
+    //MARK: data za prozor
     func getDataForWindow(data: [Double], window: Int, samplesPerWindow: Int) -> [Double]{
         var windowData = [Double]()
       
@@ -427,29 +433,4 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 }
 
 
-//MARK: Extenzije
-
-extension String {
-    func endsWith (str: String) -> Bool {
-        if let range = self.rangeOfString(str, options:NSStringCompareOptions.BackwardsSearch) {
-            return range.endIndex == self.endIndex
-        }
-        return false
-    }
-}
-
-
-extension Array {
-    func getAverage() -> Double {
-        var sum = 0.0
-        if self[0] is Double {
-            for i in 0..<self.count {
-                sum += self[i] as! Double
-            }
-        } else {
-            print("Nije Double array!!!")
-        }
-        return sum/Double(self.count)
-    }
-}
 

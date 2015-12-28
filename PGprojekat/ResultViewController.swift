@@ -24,24 +24,9 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
     
     var wavData: WavData!
     var dftMaker: DFT!
+
     
-    func customizeChart(){
-        
-        dftChart.descriptionText = ""
-        
-        
-//       contentView.frame.size.height = dftChart.frame.origin.x + dftChart.frame.size.height+50
-//        windowPicker.delegate = self;
-//        windowPicker.dataSource = self;
-        
-    }
-    
-    func randomInit(){
-        
-         dftMaker = DFT()
-         descriptionTextView.text = wavData.description
-    }
-    
+    //MARK: DFT
     func doFFTdata(window:Int = 0){
         
         let preDftArray = wavData.rawDataForWindows[window];
@@ -49,12 +34,17 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
         
         let postDftArray = dftMaker.fft(preDftArray)
         
-        updateChartData(postDftArray, minFrequency: wavData.minWindowFrequency)
         
-       
+        updateChartData(postDftArray, minFrequency: wavData.minWindowFrequency)
         
     }
     
+    //MARK: init metode
+    func randomInit(){
+        
+         dftMaker = DFT()
+         descriptionTextView.text = wavData.description
+    }
     
     func initPickerView(){
         
@@ -66,7 +56,8 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
         }
         
     }
-    
+
+    //MARK: Chart views metode
     func setWholeSignalChart(){
         
         timeLabel.text = "\(Double(wavData.wordWindowRange.start*20)/1000.0) - \(Double(wavData.wordWindowRange.end*20)/1000.0)"
@@ -75,6 +66,12 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
         fullSignalChart.prepBgImage()
         wordSignalChart.prepBgImage()
 }
+    
+    func customizeChart(){
+        
+        dftChart.descriptionText = ""
+        
+    }
     
     func updateChartData(chartData: [Double], minFrequency: Int){
         
@@ -96,7 +93,7 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
         
     }
 
-    
+    // MARK: Window picker view delegate i datasource metode
     func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return pickerData[row]
     }
@@ -120,7 +117,7 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
     }
 
     
-    
+    //MARK: viewController lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
