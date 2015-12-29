@@ -25,7 +25,7 @@ class MFCC: NSObject {
     
     
     // MARK: Metoda za izvrsavanje MFCC-a i racunanje koeficijenata za sve prozore
-    func doMFCC(postFFTarray: [[Double]])  {
+    func doMFCC(postFFTarray: [[Double]]) -> [[Double]]  {
         
         var coefficients = Array(count: postFFTarray.count, repeatedValue: [Double]())
         
@@ -38,11 +38,14 @@ class MFCC: NSObject {
                 for var j = 0; j<wavData.SamplesPerWindow/2;j++ {
                     sum += postFFTarray[k][j] * filterCoeffs[i][j]
                 }
-                windowCoeff.append(sum)
+                windowCoeff.append(log(sum))
+//                windowCoeff.append(sum)
             }
             coefficients[k] = windowCoeff
         }
-//        print(coefficients[0])
+        print(coefficients[8])
+        
+        return coefficients
     }
     
  

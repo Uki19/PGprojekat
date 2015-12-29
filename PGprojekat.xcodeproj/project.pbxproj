@@ -19,6 +19,7 @@
 		754CDF071C1880B500B617BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 754CDF051C1880B500B617BA /* LaunchScreen.storyboard */; };
 		754CDF121C1880B500B617BA /* PGprojekatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDF111C1880B500B617BA /* PGprojekatTests.swift */; };
 		754CDF1D1C1880B500B617BA /* PGprojekatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDF1C1C1880B500B617BA /* PGprojekatUITests.swift */; };
+		757DCC541C31FDA700D30528 /* DCT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757DCC531C31FDA700D30528 /* DCT.swift */; };
 		75862C271C2B78EB00BFA01B /* recenica16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C221C2B78EB00BFA01B /* recenica16bit.wav */; };
 		75862C281C2B78EB00BFA01B /* jogurt16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C231C2B78EB00BFA01B /* jogurt16bit.wav */; };
 		75862C291C2B78EB00BFA01B /* tastatura16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C241C2B78EB00BFA01B /* tastatura16bit.wav */; };
@@ -65,6 +66,7 @@
 		754CDF181C1880B500B617BA /* PGprojekatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PGprojekatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		754CDF1C1C1880B500B617BA /* PGprojekatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGprojekatUITests.swift; sourceTree = "<group>"; };
 		754CDF1E1C1880B500B617BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		757DCC531C31FDA700D30528 /* DCT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCT.swift; sourceTree = "<group>"; };
 		75862C221C2B78EB00BFA01B /* recenica16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = recenica16bit.wav; sourceTree = "<group>"; };
 		75862C231C2B78EB00BFA01B /* jogurt16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jogurt16bit.wav; sourceTree = "<group>"; };
 		75862C241C2B78EB00BFA01B /* tastatura16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = tastatura16bit.wav; sourceTree = "<group>"; };
@@ -147,19 +149,10 @@
 		754CDEFB1C1880B500B617BA /* PGprojekat */ = {
 			isa = PBXGroup;
 			children = (
-				754CDEFC1C1880B500B617BA /* AppDelegate.swift */,
-				754CDEFE1C1880B500B617BA /* ViewController.swift */,
-				75A4A8B01C19B91D00182452 /* DFT.swift */,
-				7511CE7D1C29EFE00068AB3D /* MFCC.swift */,
-				75CD822B1C1E1CD200392310 /* WavFileReader.swift */,
-				75B73C271C20E1770022691A /* WavData.swift */,
-				751CAEE61C236200007C77FF /* ResultViewController.swift */,
-				752EC2361C2733E5001B8E67 /* SignalView.swift */,
-				753EE0441C30D95400E30436 /* MyExtensions.swift */,
-				754CDF001C1880B500B617BA /* Main.storyboard */,
-				754CDF031C1880B500B617BA /* Assets.xcassets */,
-				754CDF051C1880B500B617BA /* LaunchScreen.storyboard */,
-				754CDF081C1880B500B617BA /* Info.plist */,
+				757DCC571C31FFA600D30528 /* Wav Stuff */,
+				757DCC561C31FF8B00D30528 /* ViewControllers */,
+				757DCC551C31FDBD00D30528 /* Sound Functions */,
+				757DCC581C31FFE100D30528 /* Other */,
 				754CDF2E1C18897D00B617BA /* Wavs */,
 			);
 			path = PGprojekat;
@@ -193,6 +186,48 @@
 				75862C261C2B78EB00BFA01B /* naocare16bit.wav */,
 			);
 			name = Wavs;
+			sourceTree = "<group>";
+		};
+		757DCC551C31FDBD00D30528 /* Sound Functions */ = {
+			isa = PBXGroup;
+			children = (
+				757DCC531C31FDA700D30528 /* DCT.swift */,
+				75A4A8B01C19B91D00182452 /* DFT.swift */,
+				7511CE7D1C29EFE00068AB3D /* MFCC.swift */,
+			);
+			name = "Sound Functions";
+			sourceTree = "<group>";
+		};
+		757DCC561C31FF8B00D30528 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				754CDEFE1C1880B500B617BA /* ViewController.swift */,
+				751CAEE61C236200007C77FF /* ResultViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		757DCC571C31FFA600D30528 /* Wav Stuff */ = {
+			isa = PBXGroup;
+			children = (
+				75CD822B1C1E1CD200392310 /* WavFileReader.swift */,
+				75B73C271C20E1770022691A /* WavData.swift */,
+			);
+			name = "Wav Stuff";
+			sourceTree = "<group>";
+		};
+		757DCC581C31FFE100D30528 /* Other */ = {
+			isa = PBXGroup;
+			children = (
+				752EC2361C2733E5001B8E67 /* SignalView.swift */,
+				753EE0441C30D95400E30436 /* MyExtensions.swift */,
+				754CDEFC1C1880B500B617BA /* AppDelegate.swift */,
+				754CDF031C1880B500B617BA /* Assets.xcassets */,
+				754CDF051C1880B500B617BA /* LaunchScreen.storyboard */,
+				754CDF081C1880B500B617BA /* Info.plist */,
+				754CDF001C1880B500B617BA /* Main.storyboard */,
+			);
+			name = Other;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -392,6 +427,7 @@
 				753EE0451C30D95400E30436 /* MyExtensions.swift in Sources */,
 				7511CE7E1C29EFE00068AB3D /* MFCC.swift in Sources */,
 				751CAEE71C236200007C77FF /* ResultViewController.swift in Sources */,
+				757DCC541C31FDA700D30528 /* DCT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

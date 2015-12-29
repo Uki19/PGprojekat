@@ -187,14 +187,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         wavData.wordWindowRange = getWordSignal(wavData, numberOfWindows: numberOfWindows)
         getWordSignalWithSpace(wavData, numberOfWindows: numberOfWindows)
         
-        let dft = DFT()
         
+        //DFT
+        let dft = DFT()
         let postFFT = dft.doFFTforWordWindows(wavData.wordRawDataForWindows)
     
-        
+        //MFCC
         let mfcc = MFCC(wavData: wavData)
-        mfcc.doMFCC(postFFT)
+        let coefficients = mfcc.doMFCC(postFFT)
         
+        //DCT
+        let dct = DCT()
+        dct.doDCT(mfcc.filterBankSize, numberOfFilters: mfcc.filterBankSize-2, withData: coefficients)
         
         performSegueWithIdentifier("showResults", sender: self)
     }

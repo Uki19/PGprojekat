@@ -33,6 +33,8 @@ struct WavData : CustomStringConvertible {
     var rawData:[Double] = [Double]()
     var rawDataForWindows: [[Double]] = [[Double]]()
     
+    var cepstralCoefficientsForWindows: [[Double]] = [[Double]]()
+    
     var description:String {
     
         return "Sample Rate: \(sampleRate)\n" +
