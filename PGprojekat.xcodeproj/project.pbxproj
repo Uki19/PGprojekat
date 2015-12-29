@@ -19,6 +19,7 @@
 		754CDF071C1880B500B617BA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 754CDF051C1880B500B617BA /* LaunchScreen.storyboard */; };
 		754CDF121C1880B500B617BA /* PGprojekatTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDF111C1880B500B617BA /* PGprojekatTests.swift */; };
 		754CDF1D1C1880B500B617BA /* PGprojekatUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 754CDF1C1C1880B500B617BA /* PGprojekatUITests.swift */; };
+		755F372E1C32F31B003F77EB /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F372D1C32F31B003F77EB /* TrainingViewController.swift */; };
 		757DCC541C31FDA700D30528 /* DCT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757DCC531C31FDA700D30528 /* DCT.swift */; };
 		75862C271C2B78EB00BFA01B /* recenica16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C221C2B78EB00BFA01B /* recenica16bit.wav */; };
 		75862C281C2B78EB00BFA01B /* jogurt16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C231C2B78EB00BFA01B /* jogurt16bit.wav */; };
@@ -66,6 +67,7 @@
 		754CDF181C1880B500B617BA /* PGprojekatUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PGprojekatUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		754CDF1C1C1880B500B617BA /* PGprojekatUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PGprojekatUITests.swift; sourceTree = "<group>"; };
 		754CDF1E1C1880B500B617BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		755F372D1C32F31B003F77EB /* TrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		757DCC531C31FDA700D30528 /* DCT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCT.swift; sourceTree = "<group>"; };
 		75862C221C2B78EB00BFA01B /* recenica16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = recenica16bit.wav; sourceTree = "<group>"; };
 		75862C231C2B78EB00BFA01B /* jogurt16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jogurt16bit.wav; sourceTree = "<group>"; };
@@ -201,8 +203,10 @@
 		757DCC561C31FF8B00D30528 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				754CDF001C1880B500B617BA /* Main.storyboard */,
 				754CDEFE1C1880B500B617BA /* ViewController.swift */,
 				751CAEE61C236200007C77FF /* ResultViewController.swift */,
+				755F372D1C32F31B003F77EB /* TrainingViewController.swift */,
 			);
 			name = ViewControllers;
 			sourceTree = "<group>";
@@ -225,7 +229,6 @@
 				754CDF031C1880B500B617BA /* Assets.xcassets */,
 				754CDF051C1880B500B617BA /* LaunchScreen.storyboard */,
 				754CDF081C1880B500B617BA /* Info.plist */,
-				754CDF001C1880B500B617BA /* Main.storyboard */,
 			);
 			name = Other;
 			sourceTree = "<group>";
@@ -427,6 +430,7 @@
 				753EE0451C30D95400E30436 /* MyExtensions.swift in Sources */,
 				7511CE7E1C29EFE00068AB3D /* MFCC.swift in Sources */,
 				751CAEE71C236200007C77FF /* ResultViewController.swift in Sources */,
+				755F372E1C32F31B003F77EB /* TrainingViewController.swift in Sources */,
 				757DCC541C31FDA700D30528 /* DCT.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

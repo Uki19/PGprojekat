@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="q9u-X9-22U">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9531" systemVersion="15B42" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="q9u-X9-22U">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
@@ -7,6 +7,56 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Training-->
+        <scene sceneID="lcz-Jp-Rfo">
+            <objects>
+                <viewController title="Training" id="oiE-tX-qyy" customClass="TrainingViewController" customModule="PGprojekat" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Qka-M9-P6p"/>
+                        <viewControllerLayoutGuide type="bottom" id="odu-aD-QCS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="STQ-s8-fbp">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="CWL-5c-AhC">
+                                <rect key="frame" x="0.0" y="64" width="600" height="313"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="313" id="4qg-qD-YTf"/>
+                                </constraints>
+                            </tableView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LyD-nx-dar">
+                                <rect key="frame" x="277" y="423" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="trainButtonPressed:" destination="oiE-tX-qyy" eventType="touchUpInside" id="zLl-PE-lnj"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hHG-JT-4xM">
+                                <rect key="frame" x="277" y="385" width="46" height="30"/>
+                                <state key="normal" title="Button"/>
+                                <connections>
+                                    <action selector="recordButtonPressed:" destination="oiE-tX-qyy" eventType="touchUpInside" id="M1C-ko-pHf"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hHG-JT-4xM" firstAttribute="top" secondItem="CWL-5c-AhC" secondAttribute="bottom" constant="8" symbolic="YES" id="28x-E9-LL6"/>
+                            <constraint firstItem="CWL-5c-AhC" firstAttribute="top" secondItem="Qka-M9-P6p" secondAttribute="bottom" id="7eT-1V-EOB"/>
+                            <constraint firstAttribute="trailing" secondItem="CWL-5c-AhC" secondAttribute="trailing" id="8wb-z6-nJl"/>
+                            <constraint firstItem="CWL-5c-AhC" firstAttribute="leading" secondItem="STQ-s8-fbp" secondAttribute="leading" id="ARt-6r-rEB"/>
+                            <constraint firstItem="LyD-nx-dar" firstAttribute="leading" secondItem="hHG-JT-4xM" secondAttribute="leading" id="HEz-WU-XeP"/>
+                            <constraint firstItem="LyD-nx-dar" firstAttribute="centerX" secondItem="CWL-5c-AhC" secondAttribute="centerX" id="ufi-di-Mzd"/>
+                            <constraint firstItem="LyD-nx-dar" firstAttribute="top" secondItem="hHG-JT-4xM" secondAttribute="bottom" constant="8" symbolic="YES" id="wPt-cr-3N7"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="J5K-dv-sfm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1920" y="104"/>
+        </scene>
         <!--Prepoznavanje Govora-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -47,6 +97,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Prepoznavanje Govora" id="gqW-Cc-qPo">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="DXZ-HZ-sFq">
+                            <connections>
+                                <segue destination="oiE-tX-qyy" kind="show" id="8mr-bH-wfg"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" title="Delete all" id="bLw-4i-QUO">
                             <color key="tintColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                             <connections>
