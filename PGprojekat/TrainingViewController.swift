@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDelegate, UITableViewDataSource {
+class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate {
 
     var documentsPath: String!
     var player: AVAudioPlayer!
@@ -46,6 +46,8 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
             }
             
         }
+        
+        wordTextView.delegate = self
         
         reloadRecordedWavs()
     }
@@ -156,13 +158,15 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
 
         }
         
-//        print("***** COEFFS *****")
-//        for wav in wavDataArray {
-//            for d in wav.cepstralCoefficientsForWindows {
-//                print(d[1])
-//            }
-//            print("\n______________NEXT______________ \n")
-//        }
+        
+        print("***** COEFFS *****")
+        var allWavCoeffs = [[[Double]]]()
+        for wav in wavDataArray {
+            allWavCoeffs.append(wav.cepstralCoefficientsForWindows)
+            print("\n______________NEXT______________ \n")
+        }
+        
+        print(allWavCoeffs.count)
     }
 
     //MARK: TableView delegate and dataSource
@@ -190,6 +194,11 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
        return recordedURLS.count
     }
     
+    //MARK: TextView delegate
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        wordTextView.resignFirstResponder()
+        return true
+    }
     
     //MARK: Segue metodi
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

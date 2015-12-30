@@ -9,5 +9,13 @@
 import UIKit
 
 class HMM: NSObject {
+    
+    
+    
+    func hmmTraining(coefficientSequences: [[[Double]]]){
+        
+        
+        
+    }
 
 }
