@@ -43,7 +43,7 @@ class MFCC: NSObject {
             }
             coefficients[k] = windowCoeff
         }
-        print(coefficients[8])
+        print(coefficients.first)
         
         return coefficients
     }

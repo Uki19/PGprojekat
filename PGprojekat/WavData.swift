@@ -24,7 +24,7 @@ struct WavData : CustomStringConvertible {
     var threshold: Double = 0
     var deviation: Double = 0
     var minWindowFrequency: Int = 0
-    var wordWindowRange: (start: Int, end: Int) = (0,0)
+    var wordWindowRange: (start: Int?, end: Int?) = (0,0)
     
     var data:[Double] = [Double]()
     var dataForWindows: [[Double]] = [[Double]]()

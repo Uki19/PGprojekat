@@ -26,10 +26,9 @@ class DCT: NSObject {
         }
     
         
+        print("CEPSTRUM COEFFS: \(allWindowsCepstrum.first)")
         
-        print("CEPSTRUM COEFFS: \(allWindowsCepstrum[8])")
-        
-       return allWindowsCepstrum
+        return allWindowsCepstrum
     }
     
     func doSingleDCT(data: [Double]) -> [Double] {

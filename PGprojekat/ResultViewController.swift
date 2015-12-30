@@ -60,7 +60,7 @@ class ResultViewController: UIViewController,ChartViewDelegate, UIPickerViewData
     //MARK: Chart views metode
     func setWholeSignalChart(){
         
-        timeLabel.text = "\(Double(wavData.wordWindowRange.start*20)/1000.0) - \(Double(wavData.wordWindowRange.end*20)/1000.0)"
+        timeLabel.text = "\(Double(wavData.wordWindowRange.start!*20)/1000.0) - \(Double(wavData.wordWindowRange.end!*20)/1000.0)"
         fullSignalChart.data = wavData.data
         wordSignalChart.data = wavData.wordData
         fullSignalChart.prepBgImage()
