@@ -156,10 +156,13 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
 
         }
         
-        print("***** COEFFS *****")
-        for wav in wavDataArray {
-            print(wav.cepstralCoefficientsForWindows.first)
-        }
+//        print("***** COEFFS *****")
+//        for wav in wavDataArray {
+//            for d in wav.cepstralCoefficientsForWindows {
+//                print(d[1])
+//            }
+//            print("\n______________NEXT______________ \n")
+//        }
     }
 
     //MARK: TableView delegate and dataSource

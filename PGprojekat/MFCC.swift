@@ -38,7 +38,7 @@ class MFCC: NSObject {
                 for var j = 0; j<wavData.SamplesPerWindow/2;j++ {
                     sum += postFFTarray[k][j] * filterCoeffs[i][j]
                 }
-                windowCoeff.append(log(sum))
+                windowCoeff.append(log10(sum))
 //                windowCoeff.append(sum)
             }
             coefficients[k] = windowCoeff

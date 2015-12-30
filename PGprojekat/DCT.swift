@@ -56,7 +56,7 @@ class DCT: NSObject {
 //        }
 //        vDSP_DCT_Execute(dctSetup, input, &out)
         
-        return Array(cepstrum[1..<13])
+        return Array(cepstrum[0..<13])
 //        return cepstrum
     }
     
