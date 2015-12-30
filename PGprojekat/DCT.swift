@@ -27,7 +27,9 @@ class DCT: NSObject {
     
         
         print("CEPSTRUM COEFFS: \(allWindowsCepstrum.first)")
-        
+        for i in 0..<allWindowsCepstrum.count-1 {
+            print(eucledeanDist(allWindowsCepstrum[i], two: allWindowsCepstrum[i+1]))
+        }
         return allWindowsCepstrum
     }
     
@@ -54,9 +56,18 @@ class DCT: NSObject {
 //        }
 //        vDSP_DCT_Execute(dctSetup, input, &out)
         
-        
-        return cepstrum
+        return Array(cepstrum[1..<13])
+//        return cepstrum
     }
     
+    
+    func eucledeanDist(one: [Double], two: [Double]) -> Double {
+        
+        var sum = 0.0
+        for i in 0..<one.count {
+            sum += pow(two[i]-one[i],2)
+        }
+        return sqrt(sum)
+    }
 
 }
