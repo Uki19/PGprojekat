@@ -13,6 +13,8 @@ class HMM: NSObject {
     var numberOfStates = 0
     var allCoeffSequences = [[[Double]]]()
     
+    var segmentedArrays = [[[[Double]]]]()
+    
     
     init(numberOfWordWindows: Int) {
         self.numberOfStates = Int(round(Double(numberOfWordWindows)*20.0/1000.0 * 20.0))
@@ -26,25 +28,44 @@ class HMM: NSObject {
         
         print("****** TRAINING *******")
         allCoeffSequences = coefficientSequences
-        for var coeffSeq in coefficientSequences {
+        for var coeffSeq in allCoeffSequences {
             var segmentSize = Int(floor(Double(coeffSeq.count)/Double(numberOfStates)))
             
             var start = 0
+            var wordArray = [[[Double]]]()
             for (var i=0; i<numberOfStates; ++i){
                 
                 if segmentSize < Int(floor(Double(coeffSeq.count - start)/Double(numberOfStates-i))) {
                     segmentSize++
                 }
                 let length = min(coeffSeq.count - start, segmentSize)
+                let segmentArray:[[Double]] = Array(coeffSeq[start..<start+length])
+                wordArray.append(segmentArray)
                 print(" \(i) --> \(start) --> \(coeffSeq[start..<start+length].count)")
                  start += segmentSize
-                
             }
-        
+            segmentedArrays.append(wordArray)
             print(coeffSeq.count)
+            
+            
+            
         }
-    
         
+        var averageVectorsAll = [[[Double]]]()
+        
+        for i in 0..<numberOfStates {
+            var averageVectors = [[Double]]()
+            for segment in segmentedArrays {
+                for j in 0..<segment[i].count {
+                    averageVectors.append(segment[i][j])
+                }
+            }
+            averageVectorsAll.append(averageVectors)
+        }
+        print(averageVectorsAll[0])
+        print("MIDDLE \(getMiddleVector(averageVectorsAll[0]))")
+        print(segmentedArrays[0].count)
+        print(allCoeffSequences.count)
     }
     
     //MARK: helpful vectors functions
