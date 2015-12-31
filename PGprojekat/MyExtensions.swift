@@ -18,7 +18,9 @@ extension String {
 }
 
 
-extension Array {
+extension Array  {
+    
+       
     func getAverage() -> Double {
         var sum = 0.0
         if self[0] is Double {
@@ -29,6 +31,28 @@ extension Array {
             print("Nije Double array!!!")
         }
         return sum/Double(self.count)
+    }
+}
+
+func += (inout left: [Double],right: [Double]) {
+    if(left.count != right.count) {
+        print(left.count)
+        print(right.count)
+        print("NIZOVI NISU ISTE DUZINE")
+        return
+    }
+    
+    for i in 0..<left.count {
+        
+        left[i] += right[i]
+    }
+}
+
+func /= (inout left:[Double], right: Double) {
+
+    for i in 0..<left.count {
+        
+        left[i] /= right
     }
 }
 

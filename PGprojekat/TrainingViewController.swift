@@ -166,7 +166,9 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
             print("\n______________NEXT______________ \n")
         }
         
-        print(allWavCoeffs.count)
+        let hmm = HMM(numberOfWordWindows: wavDataArray[0].cepstralCoefficientsForWindows.count)
+        hmm.hmmTraining(allWavCoeffs)
+
     }
 
     //MARK: TableView delegate and dataSource

@@ -40,7 +40,7 @@
                                     <action selector="recordButtonPressed:" destination="oiE-tX-qyy" eventType="touchUpInside" id="M1C-ko-pHf"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Rec koju trenirate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ecx-tY-hF7">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="uros" borderStyle="roundedRect" placeholder="Rec koju trenirate" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ecx-tY-hF7">
                                 <rect key="frame" x="62" y="8" width="518" height="30"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="498" id="3GW-JF-ZVm"/>
