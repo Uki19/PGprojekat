@@ -27,22 +27,20 @@ class HMM: NSObject {
         print("****** TRAINING *******")
         allCoeffSequences = coefficientSequences
         for var coeffSeq in coefficientSequences {
-            let segmentSize = Int(floor(Double(coeffSeq.count)/Double(numberOfStates)))
+            var segmentSize = Int(floor(Double(coeffSeq.count)/Double(numberOfStates)))
             
-            
+            var start = 0
             for (var i=0; i<numberOfStates; ++i){
-                let start = i * segmentSize
-                var length = min(coeffSeq.count - start, segmentSize)
-                if numberOfStates-i == 1 && coeffSeq.count-start > segmentSize {
-                    length = coeffSeq.count-start
+                
+                if segmentSize < Int(floor(Double(coeffSeq.count - start)/Double(numberOfStates-i))) {
+                    segmentSize++
                 }
-                print(" \(i) --> \(coeffSeq[start..<start+length].count)")
+                let length = min(coeffSeq.count - start, segmentSize)
+                print(" \(i) --> \(start) --> \(coeffSeq[start..<start+length].count)")
+                 start += segmentSize
+                
             }
-            
-//            print("SEG SIZE: \(segmentSize)")
-//            for var i = 0; i<coeffSeq.count; i+=segmentSize {
-//                print("\(i) -->\(coeffSeq[i..<min(i+segmentSize, coeffSeq.count)].count)")
-//            }
+        
             print(coeffSeq.count)
         }
     
