@@ -62,8 +62,15 @@ class HMM: NSObject {
             }
             averageVectorsAll.append(averageVectors)
         }
-        print(averageVectorsAll[0])
+        var middleVectorsForStates = [[Double]]()
+        
+        for avgVector in averageVectorsAll {
+            middleVectorsForStates.append(getMiddleVector(avgVector))
+        }
+        
         print("MIDDLE \(getMiddleVector(averageVectorsAll[0]))")
+        print(middleVectorsForStates.count)
+        
         print(segmentedArrays[0].count)
         print(allCoeffSequences.count)
     }
@@ -83,7 +90,6 @@ class HMM: NSObject {
         var sumArray = [Double](count: vectors[0].count, repeatedValue: 0.0)
         for vector in vectors {
             sumArray += vector
-            print(sumArray.count)
         }
         sumArray /= Double(vectors.count)
         return sumArray

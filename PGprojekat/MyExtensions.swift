@@ -36,8 +36,6 @@ extension Array  {
 
 func += (inout left: [Double],right: [Double]) {
     if(left.count != right.count) {
-        print(left.count)
-        print(right.count)
         print("NIZOVI NISU ISTE DUZINE")
         return
     }
