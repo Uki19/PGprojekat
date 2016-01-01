@@ -73,17 +73,17 @@ class HMM: NSObject {
         
         print(segmentedArrays[0].count)
         print(allCoeffSequences.count)
+        
+        let kmeans = KMeans()
+        
+        kmeans.performKMeans(allCoeffSequences[0], clusters: middleVectorsForStates, k: numberOfStates)
+        
+        print(kmeans.membership!)
+        print(kmeans.clusterSizes!)
+        
+//        print(kMeans(allCoeffSequences[0], clusters: middleVectorsForStates,minChange: 0.0001).1)
     }
     
-    //MARK: helpful vectors functions
-    func eucledeanDist(one: [Double], two: [Double]) -> Double {
-        
-        var sum = 0.0
-        for i in 0..<one.count {
-            sum += pow(two[i]-one[i],2)
-        }
-        return sqrt(sum)
-    }
 
     func getMiddleVector(vectors: [[Double]]) -> [Double] {
         

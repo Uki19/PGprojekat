@@ -54,6 +54,15 @@ func /= (inout left:[Double], right: Double) {
     }
 }
 
+func / (left:[Double], right: Double) -> [Double]{
+    
+    var retArray = [Double](count: left.count, repeatedValue: 0.0)
+    for i in 0..<left.count {
+        retArray[i] = left[i] / right
+    }
+    return retArray
+}
+
 //
 //func + (left: String, right: String) -> String {
 //    var newString = left

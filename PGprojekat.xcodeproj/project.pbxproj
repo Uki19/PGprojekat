@@ -22,6 +22,7 @@
 		755F372E1C32F31B003F77EB /* TrainingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 755F372D1C32F31B003F77EB /* TrainingViewController.swift */; };
 		756FCE331C334333009FEE38 /* SpeechRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FCE321C334333009FEE38 /* SpeechRecognizer.swift */; };
 		756FCE351C33455A009FEE38 /* HMM.swift in Sources */ = {isa = PBXBuildFile; fileRef = 756FCE341C33455A009FEE38 /* HMM.swift */; };
+		757C623D1C372C47001AEEF0 /* KMeans.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757C623C1C372C47001AEEF0 /* KMeans.swift */; };
 		757DCC541C31FDA700D30528 /* DCT.swift in Sources */ = {isa = PBXBuildFile; fileRef = 757DCC531C31FDA700D30528 /* DCT.swift */; };
 		75862C271C2B78EB00BFA01B /* recenica16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C221C2B78EB00BFA01B /* recenica16bit.wav */; };
 		75862C281C2B78EB00BFA01B /* jogurt16bit.wav in Resources */ = {isa = PBXBuildFile; fileRef = 75862C231C2B78EB00BFA01B /* jogurt16bit.wav */; };
@@ -72,6 +73,7 @@
 		755F372D1C32F31B003F77EB /* TrainingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TrainingViewController.swift; sourceTree = "<group>"; };
 		756FCE321C334333009FEE38 /* SpeechRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpeechRecognizer.swift; sourceTree = "<group>"; };
 		756FCE341C33455A009FEE38 /* HMM.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HMM.swift; sourceTree = "<group>"; };
+		757C623C1C372C47001AEEF0 /* KMeans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KMeans.swift; sourceTree = "<group>"; };
 		757DCC531C31FDA700D30528 /* DCT.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DCT.swift; sourceTree = "<group>"; };
 		75862C221C2B78EB00BFA01B /* recenica16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = recenica16bit.wav; sourceTree = "<group>"; };
 		75862C231C2B78EB00BFA01B /* jogurt16bit.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = jogurt16bit.wav; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 				7511CE7D1C29EFE00068AB3D /* MFCC.swift */,
 				756FCE321C334333009FEE38 /* SpeechRecognizer.swift */,
 				756FCE341C33455A009FEE38 /* HMM.swift */,
+				757C623C1C372C47001AEEF0 /* KMeans.swift */,
 			);
 			name = "Sound Functions";
 			sourceTree = "<group>";
@@ -429,6 +432,7 @@
 			files = (
 				75A4A8B11C19B91D00182452 /* DFT.swift in Sources */,
 				756FCE351C33455A009FEE38 /* HMM.swift in Sources */,
+				757C623D1C372C47001AEEF0 /* KMeans.swift in Sources */,
 				754CDEFF1C1880B500B617BA /* ViewController.swift in Sources */,
 				752EC2371C2733E5001B8E67 /* SignalView.swift in Sources */,
 				75B73C281C20E1770022691A /* WavData.swift in Sources */,
