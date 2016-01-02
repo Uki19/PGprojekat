@@ -67,17 +67,14 @@ class HMM: NSObject {
         for avgVector in averageVectorsAll {
             middleVectorsForStates.append(getMiddleVector(avgVector))
         }
-        
-        print("MIDDLE \(getMiddleVector(averageVectorsAll[0]))")
-        print(middleVectorsForStates.count)
-        
-        print(segmentedArrays[0].count)
-        print(allCoeffSequences.count)
+    
         
         let kmeans = KMeans()
         
-        kmeans.performKMeans(allCoeffSequences[0], clusters: middleVectorsForStates, k: numberOfStates)
-        
+        for i in 0..<allCoeffSequences.count {
+            print("K MEANS BROJ : \(i)")
+            kmeans.performKMeans(allCoeffSequences[i], clusters: middleVectorsForStates, k: numberOfStates)
+        }
         print(kmeans.membership!)
         print(kmeans.clusterSizes!)
         

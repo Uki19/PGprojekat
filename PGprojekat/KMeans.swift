@@ -23,6 +23,9 @@ class KMeans: NSObject {
     func initialMembership() {
         var start = 0
         var segmentSize = Int(floor(Double(n)/Double(k)))
+        
+        clusterSizes = [Int](count:k, repeatedValue: 0)
+        
         for i in 0..<self.k {
             
             if segmentSize < Int(floor(Double(n - start)/Double(k-i))) {
@@ -31,22 +34,33 @@ class KMeans: NSObject {
             let length = min(n - start, segmentSize)
             for j in 0..<length {
                 self.membership![start+j] = i
+                clusterSizes![i]++
             }
             start += segmentSize
         }
         
+        print(clusterSizes)
+        var offset = 0
+        for i in 0..<k {
+            var stateAverage = [[Double]]()
+            for j in 0..<clusterSizes![i] {
+                stateAverage.append(objects[offset+j])
+            }
+            clusters.append(getMiddleVector(stateAverage))
+            offset += clusterSizes![i]
+        }
     }
     
     func performKMeans(data: [[Double]], clusters: [[Double]], k: Int, threshold: Float = 0.000001){
     
         objects = data
-        self.clusters = clusters
+//        self.clusters = clusters
         n = objects.count
         self.k = k
         membership = [Int](count: n, repeatedValue: -1)
         initialMembership()
         print(self.membership!)
-        clusterSizes = [Int](count:k, repeatedValue: 0)
+        
         var error:Float = 0.0
 //        var previousError:Float = 0.0
         
@@ -147,6 +161,17 @@ class KMeans: NSObject {
             sum += pow(two[i]-one[i],2)
         }
         return sqrt(sum)
+    }
+
+    
+    func getMiddleVector(vectors: [[Double]]) -> [Double] {
+        
+        var sumArray = [Double](count: vectors[0].count, repeatedValue: 0.0)
+        for vector in vectors {
+            sumArray += vector
+        }
+        sumArray /= Double(vectors.count)
+        return sumArray
     }
 
 }

@@ -38,14 +38,14 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
         wavFolderPath = documentsURL?.URLByAppendingPathComponent("trainingFiles")
         
         try! NSFileManager.defaultManager().createDirectoryAtPath(wavFolderPath.path!, withIntermediateDirectories: true, attributes: nil)
-        let list = try! NSFileManager.defaultManager().contentsOfDirectoryAtPath(wavFolderPath.path!)
-        for i in 0..<list.count {
-            
-            if list[i].endsWith(".wav"){
-                try! NSFileManager.defaultManager().removeItemAtPath((wavFolderPath.path?.stringByAppendingString("/\(list[i])"))!)
-            }
-            
-        }
+//        let list = try! NSFileManager.defaultManager().contentsOfDirectoryAtPath(wavFolderPath.path!)
+//        for i in 0..<list.count {
+//            
+//            if list[i].endsWith(".wav"){
+//                try! NSFileManager.defaultManager().removeItemAtPath((wavFolderPath.path?.stringByAppendingString("/\(list[i])"))!)
+//            }
+//            
+//        }
         
         wordTextView.delegate = self
         
@@ -195,6 +195,19 @@ class TrainingViewController: UIViewController, AVAudioRecorderDelegate, UITable
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        return recordedURLS.count
     }
+    
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
+        let location = tableView.cellForRowAtIndexPath(indexPath)?.textLabel?.text
+          try! NSFileManager.defaultManager().removeItemAtPath((wavFolderPath.path?.stringByAppendingString("/\(location!)"))!)
+        recordedURLS.removeAtIndex(indexPath.row)
+        tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: UITableViewRowAnimation.Automatic)
+        
+    }
+    
     
     //MARK: TextView delegate
     func textFieldShouldReturn(textField: UITextField) -> Bool {
