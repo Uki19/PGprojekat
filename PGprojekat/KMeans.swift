@@ -20,16 +20,35 @@ class KMeans: NSObject {
     var n = 0
     var k = 0
     
-    func performKMeans(data: [[Double]], clusters: [[Double]], k: Int, threshold: Float = 0.0001){
+    func initialMembership() {
+        var start = 0
+        var segmentSize = Int(floor(Double(n)/Double(k)))
+        for i in 0..<self.k {
+            
+            if segmentSize < Int(floor(Double(n - start)/Double(k-i))) {
+                segmentSize++
+            }
+            let length = min(n - start, segmentSize)
+            for j in 0..<length {
+                self.membership![start+j] = i
+            }
+            start += segmentSize
+        }
+        
+    }
+    
+    func performKMeans(data: [[Double]], clusters: [[Double]], k: Int, threshold: Float = 0.000001){
     
         objects = data
         self.clusters = clusters
         n = objects.count
         self.k = k
         membership = [Int](count: n, repeatedValue: -1)
+        initialMembership()
+        print(self.membership!)
         clusterSizes = [Int](count:k, repeatedValue: 0)
         var error:Float = 0.0
-        var previousError:Float = 0.0
+//        var previousError:Float = 0.0
         
         repeat {
             
@@ -57,23 +76,66 @@ class KMeans: NSObject {
             }
             
             clusterSizes = newClusterSizes
-            previousError = error
+//            previousError = error
+            print("SIZES: \(clusterSizes)")
             
-        } while abs(error - previousError) > threshold
+        } while error > 0
     
     }
     
     func findNearestCluster(object: [Double], centroids: [[Double]], k: Int) -> Int {
         
-        var minDistance = Double.infinity
+//        var minDistance = Double.infinity
         var clusterIndex = 0
-        for i in 0..<k {
-            let distance = eucledeanDist(object, two: centroids[i])
-            if distance < minDistance {
-                minDistance = distance
-                clusterIndex = i
+        let indexOfObject = self.objects.indexOf({$0 == object})!
+        if indexOfObject == self.objects.count-1 || indexOfObject==0 || (membership![indexOfObject] == membership![indexOfObject+1] && membership![indexOfObject] == membership![indexOfObject-1]) {
+            return membership![indexOfObject]
+        }
+        if membership![indexOfObject]+1 != k {
+            let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]+1])
+            let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
+            if distA < distB {
+//                minDistance = distA
+                clusterIndex = membership![indexOfObject]+1
+            } else {
+//                minDistance = distB
+                clusterIndex = membership![indexOfObject]
             }
         }
+        if membership![indexOfObject] != membership![indexOfObject-1] && indexOfObject-1 != -1 {
+            let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]-1])
+            let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
+            if distA < distB {
+//                minDistance = distA
+                clusterIndex = membership![indexOfObject]-1
+            } else {
+//                minDistance = distB
+                clusterIndex = membership![indexOfObject]
+            }
+        }
+//        var difference = 1
+//        if indexOfObject == self.objects.count - 1 || membership![indexOfObject] == k - 1 {
+//            difference = -1
+//        }
+//        if indexOfObject == 0 || indexOfObject == self.objects.count - 1 || membership![indexOfObject] == 0 || membership![indexOfObject] == k-1 {
+//            let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]+difference])
+//            let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
+//            if distA < distB {
+//                minDistance = distA
+//                clusterIndex = membership![indexOfObject]+difference
+//            } else {
+//                minDistance = distB
+//                clusterIndex = membership![indexOfObject]
+//            }
+//        } else {
+//            for i in 0..<3 {
+//                let distance = eucledeanDist(object, two: centroids[membership![indexOfObject]-1+i])
+//                if distance < minDistance {
+//                    minDistance = distance
+//                    clusterIndex = i
+//                }
+//            }
+//        }
         return clusterIndex
         
     }
