@@ -88,7 +88,7 @@ class SpeechRecognizer: NSObject {
         print(maybeArray)
         for(var i = 0; i < maybeArray.count-1; i++){
             let razlika = maybeArray[i+1] - maybeArray[i]
-            if razlika <= 7 {
+            if razlika <= 5 {
                 for(var j = 0; j <= razlika;j++){
                     if !wordWindows.contains(maybeArray[i]+j){
                         wordWindows.append(maybeArray[i]+j)

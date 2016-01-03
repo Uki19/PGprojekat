@@ -7,60 +7,74 @@
 //
 
 import UIKit
+import GameplayKit
 
 class KMeans: NSObject {
     
-    var membership: [Int]?
-    var clusterSizes: [Int]?
+    var membership: [[Int]]?
+    var clusterSizes: [[Int]]?
     
-    var objects = [[Double]]()
+    var objects = [[[Double]]]()
     
     var clusters = [[Double]]()
     
     var n = 0
     var k = 0
     
-    func initialMembership() {
+    var numberOfSegments = 0
+    
+    
+    //MARK: Inicijalni setup, memebership, pocetni clusteri - skoro podjednako podeljeni
+    func initialSetup() {
         var start = 0
-        var segmentSize = Int(floor(Double(n)/Double(k)))
         
-        clusterSizes = [Int](count:k, repeatedValue: 0)
+        clusterSizes = [[Int]]()
         
-        for i in 0..<self.k {
-            
-            if segmentSize < Int(floor(Double(n - start)/Double(k-i))) {
-                segmentSize++
+        for segment in 0..<numberOfSegments {
+            start = 0
+            var tmpClusterSizes = [Int](count:k, repeatedValue: 0)
+            self.n = objects[segment].count
+            var segmentSize = Int(floor(Double(n)/Double(k)))
+            for i in 0..<self.k {
+                
+                if segmentSize < Int(floor(Double(n - start)/Double(k-i))) {
+                    segmentSize++
+                }
+                let length = min(n - start, segmentSize)
+                for j in 0..<length {
+                    self.membership![segment][start+j] = i
+                    tmpClusterSizes[i]++
+                }
+                start += segmentSize
             }
-            let length = min(n - start, segmentSize)
-            for j in 0..<length {
-                self.membership![start+j] = i
-                clusterSizes![i]++
-            }
-            start += segmentSize
+           clusterSizes?.append(tmpClusterSizes)
         }
         
         print(clusterSizes)
-        var offset = 0
-        for i in 0..<k {
-            var stateAverage = [[Double]]()
-            for j in 0..<clusterSizes![i] {
-                stateAverage.append(objects[offset+j])
-            }
-            clusters.append(getMiddleVector(stateAverage))
-            offset += clusterSizes![i]
-        }
+    
+        let tmpClusters = [Double](count: (objects.first?.first?.count)! , repeatedValue: 0.0)
+        clusters = Array(count:k, repeatedValue: tmpClusters)
+        countClusterCentroid()
+        
     }
     
-    func performKMeans(data: [[Double]], clusters: [[Double]], k: Int, threshold: Float = 0.000001){
     
+    //MARK: DOING K - MEANS HERE
+    func performKMeans(data: [[[Double]]], k: Int, threshold: Float = 0.000001){
+        
+        numberOfSegments = data.count
         objects = data
-//        self.clusters = clusters
+//        for obj in objects {
+//            print("OBJECTS: \(obj.debugPrint())")
+//        }
         n = objects.count
         self.k = k
-        membership = [Int](count: n, repeatedValue: -1)
-        initialMembership()
-        print(self.membership!)
-        
+        membership = [[Int]]()
+        for segment in 0..<numberOfSegments {
+            let tmpSegMembership = [Int](count:objects[segment].count, repeatedValue: -1)
+            membership!.append(tmpSegMembership)
+        }
+        initialSetup()
         var error:Float = 0.0
 //        var previousError:Float = 0.0
         
@@ -68,19 +82,21 @@ class KMeans: NSObject {
             
             error = 0
 //            var newCentroids = Array(clusters)
-            var newClusterSizes = [Int](count: k, repeatedValue: 0)
+            let tmpClusterSizes = [Int](count: k, repeatedValue: 0)
+            var newClusterSizes = Array(count: numberOfSegments, repeatedValue: tmpClusterSizes)
             
-            for i in 0..<n {
-                
-                let clusterIndex = findNearestCluster(objects[i], centroids: self.clusters, k: self.k)
-                if membership![i] != clusterIndex {
-                    error += 1
-                    membership![i] = clusterIndex
+            for segment in 0..<numberOfSegments {
+                self.n = objects[segment].count
+                for i in 0..<n {
+                    let clusterIndex = findNearestCluster(objects[segment][i], centroids: self.clusters, k: self.k, segment: segment)
+                    if membership![segment][i] != clusterIndex {
+                        error += 1
+                        membership![segment][i] = clusterIndex
+                    }
+                    newClusterSizes[segment][clusterIndex]++
+    //                newCentroids[clusterIndex] += objects[i]
                 }
-                newClusterSizes[clusterIndex]++
-//                newCentroids[clusterIndex] += objects[i]
             }
-            
 //            for i in 0..<k {
 //                let size = newClusterSizes[i]
 //                if size > 0 {
@@ -93,86 +109,70 @@ class KMeans: NSObject {
             countClusterCentroid()
 //            previousError = error
             print("SIZES: \(clusterSizes)")
-        for i in 0..<objects.count-1 {
-            print(objects[i].getAverage())
-            }
+            print("MEMBERSHIP: \(membership)")
+//        for i in 0..<objects.count-1 {
+//            print(objects[i].getAverage())
+//            }
         } while error > 0
     
     }
     
+    //MARK: Racunanje centroida za clustere - average svih prozora svih segmenata prvog stanja
     func countClusterCentroid(){
-        var offset = 0
+        
+        var offsets = [Int](count: numberOfSegments, repeatedValue: 0)
         for i in 0..<k {
             var stateAverage = [[Double]]()
-            if clusterSizes![i] > 0 {
-                for j in 0..<clusterSizes![i] {
-                    stateAverage.append(objects[offset+j])
+            for j in 0..<numberOfSegments {
+                for k in 0..<clusterSizes![j][i] {
+                    stateAverage.append(objects[j][offsets[j]+k])
                 }
-                clusters[i] = getMiddleVector(stateAverage)
-                offset += clusterSizes![i]
+                offsets[j]+=clusterSizes![j][i]
             }
+            clusters[i] = getMiddleVector(stateAverage)
+//            print("STATE --> \(i) --> STATE AVG: \(stateAverage.debugPrint())")
+//            print("AVERAGE --> \(i) --> \(clusters[i])")
         }
     }
     
-    func findNearestCluster(object: [Double], centroids: [[Double]], k: Int) -> Int {
+    
+    //MARK: Pronalazenje najblizeg clustera - ne moze bilo koji, samo susedni
+    func findNearestCluster(object: [Double], centroids: [[Double]], k: Int, segment: Int) -> Int {
         
 //        var minDistance = Double.infinity
+        
         var clusterIndex = 0
-        let indexOfObject = self.objects.indexOf({$0 == object})!
-        if indexOfObject == self.objects.count-1 || indexOfObject==0 || (membership![indexOfObject] == membership![indexOfObject+1] && membership![indexOfObject] == membership![indexOfObject-1]) {
-            return membership![indexOfObject]
+        let size = self.objects[segment].count
+        let indexOfObject = self.objects[segment].indexOf({$0 == object})!
+        if indexOfObject == size-1 || indexOfObject==0 || (membership![segment][indexOfObject] == membership![segment][indexOfObject+1] && membership![segment][indexOfObject] == membership![segment][indexOfObject-1]) {
+            return membership![segment][indexOfObject]
         }
-        if membership![indexOfObject]+1 != k {
-            if membership![indexOfObject] != membership![indexOfObject+1] {
-                let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]+1])
-                let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
+        if membership![segment][indexOfObject]+1 != k {
+            if membership![segment][indexOfObject] != membership![segment][indexOfObject+1] {
+                let distA = eucledeanDist(object, two: centroids[membership![segment][indexOfObject]+1])
+                let distB = eucledeanDist(object, two: centroids[membership![segment][indexOfObject]])
                 if distA < distB {
-    //                minDistance = distA
-                    clusterIndex = membership![indexOfObject]+1
+                    clusterIndex = membership![segment][indexOfObject]+1
                 } else {
-    //                minDistance = distB
-                    clusterIndex = membership![indexOfObject]
+                    clusterIndex = membership![segment][indexOfObject]
                 }
             }
         }
-        if membership![indexOfObject] != membership![indexOfObject-1] && indexOfObject-1 != -1 {
-            let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]-1])
-            let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
+        if membership![segment][indexOfObject] != membership![segment][indexOfObject-1] && indexOfObject-1 != -1 {
+            let distA = eucledeanDist(object, two: centroids[membership![segment][indexOfObject]-1])
+            let distB = eucledeanDist(object, two: centroids[membership![segment][indexOfObject]])
             if distA < distB {
-//                minDistance = distA
-                clusterIndex = membership![indexOfObject]-1
+                clusterIndex = membership![segment][indexOfObject]-1
             } else {
-//                minDistance = distB
-                clusterIndex = membership![indexOfObject]
+                clusterIndex = membership![segment][indexOfObject]
             }
         }
-//        var difference = 1
-//        if indexOfObject == self.objects.count - 1 || membership![indexOfObject] == k - 1 {
-//            difference = -1
-//        }
-//        if indexOfObject == 0 || indexOfObject == self.objects.count - 1 || membership![indexOfObject] == 0 || membership![indexOfObject] == k-1 {
-//            let distA = eucledeanDist(object, two: centroids[membership![indexOfObject]+difference])
-//            let distB = eucledeanDist(object, two: centroids[membership![indexOfObject]])
-//            if distA < distB {
-//                minDistance = distA
-//                clusterIndex = membership![indexOfObject]+difference
-//            } else {
-//                minDistance = distB
-//                clusterIndex = membership![indexOfObject]
-//            }
-//        } else {
-//            for i in 0..<3 {
-//                let distance = eucledeanDist(object, two: centroids[membership![indexOfObject]-1+i])
-//                if distance < minDistance {
-//                    minDistance = distance
-//                    clusterIndex = i
-//                }
-//            }
-//        }
         return clusterIndex
         
     }
     
+    
+    //MARK: vector funkcije
     func eucledeanDist(one: [Double], two: [Double]) -> Double {
         
         var sum = 0.0

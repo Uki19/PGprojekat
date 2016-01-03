@@ -71,10 +71,8 @@ class HMM: NSObject {
         
         let kmeans = KMeans()
         
-        for i in 0..<allCoeffSequences.count {
-            print("K MEANS BROJ : \(i)")
-            kmeans.performKMeans(allCoeffSequences[i], clusters: middleVectorsForStates, k: numberOfStates)
-        }
+        print("K MEANS BROJ : 0)")
+        kmeans.performKMeans(allCoeffSequences, k: numberOfStates)
         print(kmeans.membership!)
         print(kmeans.clusterSizes!)
         

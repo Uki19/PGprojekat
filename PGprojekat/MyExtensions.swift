@@ -20,7 +20,14 @@ extension String {
 
 extension Array  {
     
-       
+    func debugPrint() -> String {
+        var debString = ""
+        for i in 0..<self.count {
+            debString += "REDNI BROJ: -> \(i) VREDNOST: -> \(self[i]) \n"
+        }
+        return debString
+    }
+    
     func getAverage() -> Double {
         var sum = 0.0
         if self[0] is Double {
